@@ -53,10 +53,8 @@ export class AuthenticationService {
 
   public getUserToLocalCache(): User | null {
     const userJson = localStorage.getItem('user');
-    if (userJson === null) {
-      return null;
-    }
-      return JSON.parse(userJson);
+    if (userJson === null) return null;
+    return JSON.parse(userJson);
   }
 
   public loadToken(): void {
