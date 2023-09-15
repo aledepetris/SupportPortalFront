@@ -10,7 +10,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 })
 export class AuthenticationService {
 
-  private host: string = environment.apiUrl;
+  public host: string = environment.apiUrl;
   private token: string | null = null;
   private loggedInUsername: string | null = null;
   private jwtHelper = new JwtHelperService();
@@ -58,7 +58,11 @@ export class AuthenticationService {
   }
 
   public loadToken(): void {
-    this.token = localStorage.getItem('token')
+    this.token = localStorage.getItem('token');
+  }
+
+  public getToken(): string | null {
+    return this.token;
   }
 
   public isLoggedIn(): boolean {
