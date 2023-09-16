@@ -6,9 +6,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { HttpClient, HttpErrorResponse, HttpEvent } from '@angular/common/http';
 import { CustomHttpResponse } from '../model/customHttpResponse';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({providedIn: 'root'})
 export class UserService {
 
   private host: string = environment.apiUrl;
