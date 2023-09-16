@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { User } from '../model/user';
-import { JwtHelperService } from '@auth0/angular-jwt';
-import { HttpClient, HttpErrorResponse, HttpEvent } from '@angular/common/http';
+import { HttpClient, HttpEvent } from '@angular/common/http';
 import { CustomHttpResponse } from '../model/customHttpResponse';
 
 @Injectable({providedIn: 'root'})
@@ -51,16 +50,16 @@ export class UserService {
     return JSON.parse(usersJson);
   }
 
-  public createUserFormData(loggedInUsername: string, user: User, profileImage: File): FormData {
+  public createUserFormData(loggedInUsername: string | null, user: User, profileImage: File | null): FormData {
 
     const formData = new FormData();
-    formData.append('currentUsername', loggedInUsername);
-    formData.append('firsName', user.firstName);
+    if (loggedInUsername) formData.append('currentUsername', loggedInUsername);
+    formData.append('firstName', user.firstName);
     formData.append('lastName', user.lastName);
     formData.append('username', user.username);
     formData.append('email', user.email);
     formData.append('role', user.role);
-    formData.append('profileImage', profileImage);
+    if (profileImage)  formData.append('profileImage', profileImage);
     formData.append('isActive', JSON.stringify(user.isActive));
     formData.append('isNonLocked', JSON.stringify(user.isNotLocked));
 
