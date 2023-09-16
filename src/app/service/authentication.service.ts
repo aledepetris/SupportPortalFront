@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Observable } from 'rxjs';
 import { User } from '../model/user';
@@ -33,13 +33,7 @@ export class AuthenticationService {
 
   public saveToken(token: string): void {
     this.token = token;
-    localStorage.setItem('token', token)
-
-
-    this.loggedInUsername = null;
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
-    localStorage.removeItem('users');
+    localStorage.setItem('token', token);
   }
 
   public addUserToLocalCache(user: User): void {
@@ -64,7 +58,7 @@ export class AuthenticationService {
     this.loadToken();
     if (this.token != null && this.token != '') {
       if (this.jwtHelper.decodeToken(this.token).sub != null || '') {
-        if (this.jwtHelper.isTokenExpired(this.token)) {
+        if (!this.jwtHelper.isTokenExpired(this.token)) {
           this.loggedInUsername = this.jwtHelper.decodeToken(this.token).sub;
           return true;
         }
