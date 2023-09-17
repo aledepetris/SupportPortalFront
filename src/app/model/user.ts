@@ -13,16 +13,16 @@ export class User {
   public joinDate!: Date;
   public role: string;
   public authorities: [];
-  public isActive: boolean;
-  public isNotLocked: boolean;
+  public active: boolean;
+  public notLocked: boolean;
 
   constructor() {
     this.firstName = '';
     this.lastName = '';
     this.username = '';
     this.email = '';
-    this.isActive = false;
-    this.isNotLocked = false;
+    this.active = true;
+    this.notLocked = true;
     this.authorities = [];
     this.role = '';
   }
